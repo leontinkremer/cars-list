@@ -3,7 +3,7 @@ import "./App.scss";
 function App() {
   return (
     <div className="App">
-      <span className="span">Hello world!</span>
+      <span className="span">My React Boilerplate</span>
     </div>
   );
 }
