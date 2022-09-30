@@ -1,0 +1,29 @@
+@import "../../../scss/_layout.scss";
+
+.filter__item {
+  &__text {
+    /* Display & Box Model */
+    display: inline-block;
+
+    /* Styles */
+    color: $primary-color-two;
+    padding: 0.3rem 1.5rem;
+    border: solid 0.1rem $primary-color-two;
+    border-radius: 2rem;
+    @include non-select;
+
+    &:hover {
+      /* Styles */
+      background-color: $primary-color-two;
+      color: $secondary-color-0;
+
+      /* Animation */
+      @include transition-all-300;
+    }
+  }
+
+  &__text:not(last-child) {
+    /* Styles */
+    margin-bottom: $margin-s;
+  }
+}

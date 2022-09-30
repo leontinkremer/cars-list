@@ -1,1 +1,23 @@
 @import "../../scss/layout.scss";
+
+.app {
+  /* Grid */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: $margin-s;
+  grid-row-gap: 0px;
+
+  margin: $margin-s;
+}
+
+.app__left-sidebar {
+  grid-area: 1 / 1 / 2 / 2;
+  margin-top: $margin-l;
+}
+.app__main-area {
+  grid-area: 1 / 2 / 2 / 5;
+}
+.app__right-sidebar {
+  grid-area: 1 / 5 / 2 / 6;
+}

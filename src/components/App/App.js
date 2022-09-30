@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { paginate } from "../../utils/paginate";
 
+import Filter from "../Filter/Filter";
+import FilterItem from "../Filter/FilterItem";
 import List from "../List/List";
 import ListItem from "../List/ListItem";
 import ListItemField from "../List/ListItemField";
@@ -28,27 +30,36 @@ function App() {
   const itemsCrop = paginate(cars, currentPage, pageSize);
 
   return (
-    <div className="App">
-      <List>
-        {itemsCrop.map((car) => {
-          return (
-            <ListItem key={car.id}>
-              <ListItemField>{car.id}</ListItemField>
-              <ListItemField>{car.customer}</ListItemField>
-              <ListItemField>{car.car}</ListItemField>
-              <ListItemField>
-                {car.active === true ? "in Betrieb" : "ausgesteuert"}
-              </ListItemField>
-            </ListItem>
-          );
-        })}
-      </List>
-      <Pagination
-        itemsCount={count}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+    <div className="app">
+      <aside className="app__left-sidebar">
+        <Filter>
+          <FilterItem>VW</FilterItem>
+          <FilterItem>Audi</FilterItem>
+        </Filter>
+      </aside>
+      <main className="app__main-area">
+        <List>
+          {itemsCrop.map((car) => {
+            return (
+              <ListItem key={car.id}>
+                <ListItemField>{car.id}</ListItemField>
+                <ListItemField>{car.customer}</ListItemField>
+                <ListItemField>{car.car}</ListItemField>
+                <ListItemField>
+                  {car.active === true ? "in Betrieb" : "ausgesteuert"}
+                </ListItemField>
+              </ListItem>
+            );
+          })}
+        </List>
+        <Pagination
+          itemsCount={count}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      </main>
+      <aside className="app__right-sidebar"></aside>
     </div>
   );
 }

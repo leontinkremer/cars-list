@@ -1,0 +1,20 @@
+@import "../../../scss/_layout.scss";
+
+.filter {
+  &__header {
+    /* Styles */
+    background-color: $primary-color-two;
+    color: $secondary-color-0;
+
+    /* Positioning */
+    padding: 0.8rem;
+  }
+
+  &__body {
+    /* Styles */
+    background-color: $secondary-color-0;
+
+    /* Positioning */
+    padding: 0.8rem;
+  }
+}

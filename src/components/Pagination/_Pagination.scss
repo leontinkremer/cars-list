@@ -12,8 +12,7 @@
     float: left;
     padding: 1rem 2rem;
     text-decoration: none;
-    cursor: default;
-    user-select: none;
+    @include non-select;
 
     &:hover:not(.pagination__item--active) {
       background-color: $primary-color-three;

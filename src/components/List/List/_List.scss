@@ -21,6 +21,7 @@
     margin-bottom: $margin-xs;
 
     &__list-header-item {
+      @include non-select;
     }
   }
 
