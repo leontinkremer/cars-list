@@ -1,3 +1,14 @@
-@import "./_reset";
+/* Fonts */
+@import "./fonts";
 
+/* Core variables */
 @import "./_vars.scss";
+
+/* CSS Reset */
+@import "./_reset.scss";
+
+/* Core settings */
+@import "./_base.scss";
+
+/* Mixins */
+@import "./mixin";

@@ -1,0 +1,26 @@
+@import "../../../scss/_layout.scss";
+
+.list-body-item {
+  /* Styles */
+  background-color: $secondary-color-0;
+
+  /* Display & Box Model */
+  @include grid-4;
+
+  padding: 0 1rem 0 1rem;
+
+  align-items: center;
+
+  /* Sizing */
+  height: 6rem;
+
+  &:not(:last-child) {
+    margin-bottom: $margin-xs;
+  }
+
+  &:hover {
+    background-color: $secondary-soft-color-one;
+    font-weight: 600;
+    @include transition-all-300;
+  }
+}

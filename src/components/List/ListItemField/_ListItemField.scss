@@ -1,0 +1,10 @@
+@import "../../../scss/_layout.scss";
+
+.field {
+  color: $secondary-color-700;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // resize: horizontal;
+  white-space: nowrap;
+}

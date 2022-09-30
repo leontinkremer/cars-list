@@ -1,0 +1,31 @@
+@import "../../../scss/_layout.scss";
+
+.list {
+  /* Positioning */
+  margin: 2rem auto 2rem auto;
+
+  /* Sizing */
+  max-width: 110rem;
+
+  /* Other */
+
+  /* Display & Box Model */
+  color: $secondary-color-400;
+
+  &__list-header {
+    /* Display & Box Model */
+    @include grid-4;
+
+    /* Styles */
+    padding: 0 1rem 0 1rem;
+    margin-bottom: $margin-xs;
+
+    &__list-header-item {
+    }
+  }
+
+  &__list-body {
+    /* Styles */
+    border-radius: 0.1rem;
+  }
+}
