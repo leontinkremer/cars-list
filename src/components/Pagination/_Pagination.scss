@@ -1,0 +1,31 @@
+@import "../../../src/scss/layout";
+
+.pagination {
+  /* Display & Box Model */
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 2rem;
+
+  &__item {
+    color: $secondary-color-700;
+    float: left;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    cursor: default;
+    user-select: none;
+
+    &:hover:not(.pagination__item--active) {
+      background-color: $primary-color-three;
+      color: $secondary-color-0;
+      @include transition-all-300;
+    }
+
+    &--active {
+      background-color: $primary-color-two;
+      color: $secondary-color-0;
+    }
+  }
+}
+
+// .pagination__item:hover:not()
