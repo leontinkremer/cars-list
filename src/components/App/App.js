@@ -1,5 +1,6 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import { pageSize } from "../../utils/settings";
 import { paginate } from "../../utils/paginate";
 
 import Filter from "../Filter/Filter";
@@ -9,22 +10,54 @@ import ListItem from "../List/ListItem";
 import ListItemField from "../List/ListItemField";
 import Pagination from "../Pagination/Pagination";
 
-import { cars, fetchAll, fetchManufacturer } from "../../api/carsApi";
+import { fetchAll, fetchManufacturer } from "../../api/carsApi";
 
 import "./App.scss";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [cars, setCars] = useState([]);
+  const [brand, setBrand] = useState([]);
+  const [filter, setFilter] = useState();
 
   // Anzahl Ergebnisse
   const count = cars.length; // 20
 
-  // Anzahl Ergebnisse auf einer Seite
-  const pageSize = 10;
-
   // Klick auf die Komponente bearbeiten
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
+  };
+
+  // Функция для получения машин
+  const getCars = () => {
+    fetchAll.then((response) => {
+      setCars(response);
+      setCurrentPage(1); // Устанавливаем страницу
+      // console.log("Promise resolved", response);
+    });
+  };
+
+  // Запрашиваем список машин когда меняется фильтр
+  useEffect(() => {
+    getCars(filter);
+  }, [filter]);
+
+  const getBrand = () => {
+    fetchManufacturer.then((response) => {
+      setBrand(response);
+      setCurrentPage(1); // Устанавливаем страницу
+      // console.log("Promise resolved", response);
+    });
+  };
+
+  useEffect(() => {
+    getBrand();
+  }, [brand]);
+
+  // Функция для установки фильтра
+  const handleFilterChange = (filter) => {
+    setFilter(filter);
+    console.log("filter", filter);
   };
 
   const itemsCrop = paginate(cars, currentPage, pageSize);
@@ -32,11 +65,24 @@ function App() {
   return (
     <div className="app">
       <aside className="app__left-sidebar">
-        <Filter>
-          <FilterItem>VW</FilterItem>
-          <FilterItem>Audi</FilterItem>
-        </Filter>
+        {cars && (
+          <Filter items={cars} filter={filter}>
+            {brand.map((manufacturer) => {
+              return (
+                <FilterItem
+                  key={"manufacturer" + manufacturer}
+                  id={manufacturer}
+                  // doing: реализовать отображение фильра.
+                  onChangeFilter={handleFilterChange}
+                >
+                  {manufacturer}
+                </FilterItem>
+              );
+            })}
+          </Filter>
+        )}
       </aside>
+
       <main className="app__main-area">
         <List>
           {itemsCrop.map((car) => {
@@ -52,6 +98,7 @@ function App() {
             );
           })}
         </List>
+
         <Pagination
           itemsCount={count}
           pageSize={pageSize}

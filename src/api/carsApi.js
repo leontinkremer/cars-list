@@ -1,3 +1,6 @@
+import { containsWhitespace } from "../utils/containsWhitespace";
+import { limit } from "../utils/limitStringByWhitespace";
+
 export const cars = [
   {
     id: "FA1021",
@@ -20,7 +23,7 @@ export const cars = [
   {
     id: "FA2024",
     customer: "Flux GmbH & Co. KG",
-    car: "VW Golf",
+    car: "Suzuki Swift",
     active: true,
   },
   {
@@ -44,7 +47,7 @@ export const cars = [
   {
     id: "FA3033",
     customer: "UX Design AG",
-    car: "Audi A3",
+    car: "Skoda Octavia",
     active: false,
   },
   {
@@ -121,20 +124,36 @@ export const cars = [
   },
 ];
 
-export const fetchAll = (manufacturer) => {
-  new Promise((resolve) => {
-    const filterCars = cars.filter(({ car }) =>
-      manufacturer ? car.slice(0, 2) === manufacturer : true
-    );
-    setTimeout(() => {
-      resolve(filterCars);
-    }, 500);
-  });
-};
+export const fetchAll = new Promise(function (resolve) {
+  // TODO добавим фильтрацию позже
+  setTimeout(() => {
+    resolve(cars);
+  }, 2000);
+});
 
-export const fetchManufacturer = () =>
-  new Promise((resolve) => {
-    const manufacturer = cars.map(({ car }) => car.slice(0, 2));
+// Получение списка производителей
+export const fetchManufacturer = new Promise(function (resolve) {
+  const car = cars.map(({ car }) => car);
+  // console.log({ car });
 
-    const uniqManufacturer = [...new Set()];
+  const manufacturer = car.map((car) => {
+    if (containsWhitespace(car)) {
+      const indexOfWhitespace = car.indexOf(" ");
+      const manufacturer = limit(car, indexOfWhitespace);
+      return manufacturer;
+    }
   });
+
+  // console.log({ manufacturer });
+
+  const uniqManufacturer = new Set(manufacturer.sort());
+  // console.log({ uniqManufacturer });
+  // console.log(typeof uniqManufacturer);
+
+  const uniqManufacturerArr = Array.from(uniqManufacturer);
+  // console.log(uniqManufacturerArr);
+
+  setTimeout(() => {
+    resolve(uniqManufacturerArr);
+  }, 2000);
+});
